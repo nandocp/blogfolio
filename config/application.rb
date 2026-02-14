@@ -40,8 +40,8 @@ module Blogfolio
     config.generators.system_tests = nil
 
     # Set UUIDs as primery key
-    config.generators do |generate|
-      generate.orm :active_record, primary_key_type: :uuid, default: 'uuidv7()'
-    end
+    # config.generators do |generate|
+    #   generate.orm :active_record, primary_key_type: :uuid, default: 'uuidv7()'
+    # end
   end
 end
