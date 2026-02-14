@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: "docker.io/library/postgres:18.2-alpine"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./storage/pgdata/:/var/lib/postgresql
+  app: &app
+    build:
+      context: .
+      dockerfile: Containerfile
+      args:
+        - UID=1000
+        - GID=1000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/rails
+    depends_on:
+      - postgres
+    stdin_open: true
+    tty: true
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://poster:P0sting420@postgres:5432
+      - STORAGE_HOST=local
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000/up"]
+      interval: 3600s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+  test:
+    <<: *app
+    entrypoint: "./bin/thrust rspec"
+    environment:
+      - RAILS_ENV=test
+      - LOG_LEVEL=warn
+      - DATABASE_URL=postgres://poster:P0sting420@postgres:5432
+      - STORAGE_HOST=test
+
+# volumes:
+#   pgdata:
+#     external: true
+# create role poster with encrypted password 'P0sting420' login createdb;
+# psql -U postgres -h postgres -d postgres
