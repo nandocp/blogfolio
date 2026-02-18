@@ -17,7 +17,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_18_123539) do
 
   create_table "users", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
     t.string "email"
+    t.datetime "last_sign_in_at"
     t.string "name"
     t.string "password_digest"
     t.datetime "updated_at", null: false
