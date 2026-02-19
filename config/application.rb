@@ -45,5 +45,7 @@ module Blogfolio
     config.generators do |generate|
       generate.orm :active_record, primary_key_type: 'uuid, default: "uuidv7()"'
     end
+
+    config.active_record.action_on_strict_loading_violation = Rails.env.production? ? :log : true
   end
 end
