@@ -10,18 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_18_123539) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_18_182831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
 
   create_table "users", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
+    t.string "confirmation_token", limit: 128
     t.datetime "created_at", null: false
     t.datetime "current_sign_in_at"
     t.string "email"
+    t.string "encrypted_password", limit: 128
     t.datetime "last_sign_in_at"
     t.string "name"
-    t.string "password_digest"
+    t.string "remember_token", limit: 128
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 end
