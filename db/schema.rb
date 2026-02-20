@@ -17,6 +17,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_194424) do
 
   create_table "blogs", id: :uuid, default: -> { "uuidv7()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.datetime "reviewed_at"
+    t.uuid "reviewed_by_id"
+    t.integer "status", default: 0
     t.datetime "updated_at", null: false
   end
 
@@ -25,8 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_194424) do
     t.string "description", limit: 120
     t.uuid "entryable_id"
     t.string "entryable_type"
-    t.datetime "reviewed_at"
-    t.integer "status", default: 0
+    t.string "i18n", limit: 7, default: "pt-br"
     t.string "subtitle", limit: 70
     t.text "text", null: false
     t.string "title", limit: 70, null: false
@@ -58,5 +60,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_194424) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
+  add_foreign_key "blogs", "users", column: "reviewed_by_id"
   add_foreign_key "entries", "users"
 end
