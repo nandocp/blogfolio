@@ -47,5 +47,7 @@ module Blogfolio
     end
 
     config.active_record.action_on_strict_loading_violation = Rails.env.production? ? :log : true
+
+    config.i18n.default_locale = :pt
   end
 end
