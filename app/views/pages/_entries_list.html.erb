@@ -1,0 +1,15 @@
+<%= tag.div id: "#{type}-posts-list" do %>
+  <% list.each do |post| %>
+    <% entry = post.entry %>
+
+    <%= tag.div id: dom_id(post) do %>
+      <%= tag.p entry.title %>
+
+      <% if entry.subtitle %>
+        <%= tag.p entry.subtitle %>
+      <% end %>
+
+      <%= tag.p entry.description %>
+    <% end %>
+  <% end %>
+<% end %>
