@@ -10,5 +10,6 @@ class PagesController < ApplicationController
   end
 
   def blog
+    @blog_entries = Blog.includes(:entry).all
   end
 end
