@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :passwords, controller: "auth/passwords", only: [:create, :new]
-  resource :session, controller: "auth/sessions", only: [:create]
-  get "/sign_in" => "auth/sessions#new", :as => "sign_in"
-  delete "/sign_out" => "auth/sessions#destroy", :as => "sign_out"
+  resources :passwords, controller: 'auth/passwords', only: [ :create, :new ]
+  resource :session, controller: 'auth/sessions', only: [ :create ]
+  get '/sign_in' => 'auth/sessions#new', :as => 'sign_in'
+  delete '/sign_out' => 'auth/sessions#destroy', :as => 'sign_out'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,9 +13,18 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # get 'manifest' => 'rails/pwa#manifest', as: :pwa_manifest
+  # get 'service-worker' => 'rails/pwa#service_worker', as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Defines the root path route ('/')
+  root 'pages#about'
+  get :about, to: 'pages#about'
+  get :blog, to: 'pages#blog'
+  get :portfolio, to: 'pages#portfolio'
+
+  namespace :api do
+    namespace :v1 do
+      resource :portfolio_entries, controller: 'api/v1/portfolios'
+    end
+  end
 end
