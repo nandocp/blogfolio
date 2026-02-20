@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def portfolio
+    @portfolio_entries = Portfolio.includes(:entry).all
   end
 
   def blog
