@@ -28,7 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_194424) do
     t.string "description", limit: 120
     t.uuid "entryable_id"
     t.string "entryable_type"
-    t.string "i18n", limit: 7, default: "pt-br"
+    t.string "i18n", limit: 7, default: "pt"
     t.string "subtitle", limit: 70
     t.text "text", null: false
     t.string "title", limit: 70, null: false

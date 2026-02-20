@@ -8,7 +8,7 @@ class CreateEntries < ActiveRecord::Migration[8.1]
       t.text :text, null: false
       t.string :entryable_type
       t.uuid :entryable_id
-      t.string :i18n, limit: 7, default: 'pt-br'
+      t.string :i18n, limit: 7, default: 'pt'
 
       t.timestamps
     end
