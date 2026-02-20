@@ -1,0 +1,16 @@
+<section id='blog-posts'>
+    <h1>Blog</h1>
+
+    <div id='blog-posts-list'>
+        <% @blog_entries.each do |post| %>
+            <% entry = post.entry %>
+            <div id=<%= post.id %>>
+                <p><%= entry.title %></p>
+                <% if entry.subtitle %>
+                    <p><%= entry.subtitle %></p>
+                <% end %>
+                <p><%= entry.description %></p>
+            </div>
+        <% end %>
+    </div>
+</section>
